@@ -1,0 +1,74 @@
+@startuml class
+title class
+
+class MainApp {
+    + main(args : String[])
+}
+
+'社員情報クラス
+class Engineer {
+    - Id : String
+    - name : String 
+    - birthDate : LocalDate
+    - hireDate : String
+    - engineerExperienceMonth : int /'エンジニア歴'/
+    - languages : String /'扱える言語'/
+    - careerHistory : String /'経歴'/
+    - trainingHistory : String /'研修受講歴'/
+    - technicalSkill : double /'技術力'/
+    - trainingAttitude : double /'受講態度'/
+    - communicationSkill : double
+    - leadership : double 
+    - note : String /'備考'/
+    - savedDate : LocalDateTime
+
+    + getXXX()
+    + setXXX()
+}
+
+'社員情報の一覧を管理し、データを追加・削除する
+class EngineerManager {
+    - engineers : List<Engineer>
+
+    + addEngineer()
+    + updateEngineer()
+    + removeEngineer()
+    + searchEngineers()
+    + sortEngineers()
+    + importCsv()
+    + exportCsv()
+}
+
+'一覧画面
+class EngineerListView {
+    + displayEngineers()
+    + searchEngineer()
+    + sortEngineer()
+    + deleteEngineer()
+    + openDetailView()
+    + openAddView()
+}
+
+'詳細画面
+class EngineerDetailView {
+    + displayDetail()
+    + updateEngineer()
+    + back()
+}
+
+'新規登録画面
+class EngineerAddView {
+    + addEngineer()
+    + clearForm()
+    + back()
+}
+
+MainApp --> EngineerManager
+EngineerManager o-- Engineer
+
+EngineerListView --> EngineerManager
+EngineerDetailView --> EngineerManager
+EngineerDetailView --> Engineer
+EngineerAddView --> EngineerManager
+
+@enduml
